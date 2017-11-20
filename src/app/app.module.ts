@@ -4,9 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http, HttpModule } from '@angular/http';
-import {HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { GuardService } from './shared';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -26,11 +27,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
           provide: TranslateLoader,
           useFactory: HttpLoaderFactory,
-          deps: [Http]
+          deps: [HttpClient]
       }
   })
   ],
-  providers: [],
+  providers: [GuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
